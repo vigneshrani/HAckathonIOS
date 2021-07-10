@@ -278,137 +278,137 @@ class HttpUtils
 //    }
 //
 //
-    func imageUploadRequest(parameter:[String: String]?, image: UIImage?, url: String, method: HTTPMethod = .POST, mimeType: String = "image/jpg",authorization: [String: String]?, filename: String = "user-profile.jpg")-> Observable<Data>
-    {
-        return Observable.create
-        {
-            observer in
-
-
-               guard let components = URLComponents(string: url) else
-               {
-                    observer.onError(ResponseError.invalidEndpoint)
-                    return Disposables.create()
-               }
-
-               guard let url = components.url else
-               {
-                observer.onError(ResponseError.invalidEndpoint)
-                    return Disposables.create()
-               }
-
-
-
-                // generate boundary string using a unique per-app string
-                let boundary = UUID().uuidString
-
-                let config = URLSessionConfiguration.default
-                let session = URLSession(configuration: config)
-
-                // Set the URLRequest to POST and to the specified URL
-//                var urlRequest = URLRequest(url: URL(string: "http://188.166.228.50:3006/uploads/fileUpload")!)
-
-                var urlRequest = URLRequest(url: url)
-                print("Url : ",url)
-                urlRequest.httpMethod = method.rawValue
-            if authorization != nil {
-                urlRequest.allHTTPHeaderFields = authorization
-            }
-            print("authorization : ",authorization ?? "")
-//            urlRequest.httpBody = Data(parameter.utf8)
-
-
-                // Set Content-Type Header to multipart/form-data, this is equivalent to submitting form data with file upload in a web browser
-                // And the boundary is also set here
-                urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-                urlRequest.setValue(".png", forHTTPHeaderField: "extension")
-
-                var data = Data()
-                print("sfbknfks",image)
-                // Add the image data to the raw http request data
-            print("ffsnksf",parameter)
-            if parameter != nil {
-                for (key, value) in parameter! {
-                    data.appendString(string: "--\(boundary)\r\n")
-                    data.appendString(string: "Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
-                    data.appendString(string: "\(value)\r\n")
-                }
-            }
-//                data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
-////                data.append("Content-Disposition: form-data; name=\"uploaded_file\"; filename=\"\(filename)\"\r\n".data(using: .utf8)!)
-//                data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
-//                data.append(image!.pngData()!)
+//    func imageUploadRequest(parameter:[String: String]?, image: UIImage?, url: String, method: HTTPMethod = .POST, mimeType: String = "image/jpg",authorization: [String: String]?, filename: String = "user-profile.jpg")-> Observable<Data>
+//    {
+//        return Observable.create
+//        {
+//            observer in
 //
-//                // End the raw http request data, note that there is 2 extra dash ("-") at the end, this is to indicate the end of the data
-//                // According to the HTTP 1.1 specification https://tools.ietf.org/html/rfc7230
-//                data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
-//            let filename = "\("Profile_Pic").jpg"
-//            let mimetype = "image/jpg"
-//            let data1 =  image?.pngData()
-//          //  data.appendString(string: "--\(boundary)\r\n")
-//            data.appendString(string: "Content-Disposition: form-data; name=\"\("file")\"; filename=\"\(filename)\"\r\n")
+//
+//               guard let components = URLComponents(string: url) else
+//               {
+//                    observer.onError(ResponseError.invalidEndpoint)
+//                    return Disposables.create()
+//               }
+//
+//               guard let url = components.url else
+//               {
+//                observer.onError(ResponseError.invalidEndpoint)
+//                    return Disposables.create()
+//               }
+//
+//
+//
+//                // generate boundary string using a unique per-app string
+//                let boundary = UUID().uuidString
+//
+//                let config = URLSessionConfiguration.default
+//                let session = URLSession(configuration: config)
+//
+//                // Set the URLRequest to POST and to the specified URL
+////                var urlRequest = URLRequest(url: URL(string: "http://188.166.228.50:3006/uploads/fileUpload")!)
+//
+//                var urlRequest = URLRequest(url: url)
+//                print("Url : ",url)
+//                urlRequest.httpMethod = method.rawValue
+//            if authorization != nil {
+//                urlRequest.allHTTPHeaderFields = authorization
+//            }
+//            print("authorization : ",authorization ?? "")
+////            urlRequest.httpBody = Data(parameter.utf8)
+//
+//
+//                // Set Content-Type Header to multipart/form-data, this is equivalent to submitting form data with file upload in a web browser
+//                // And the boundary is also set here
+//                urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+//                urlRequest.setValue(".png", forHTTPHeaderField: "extension")
+//
+//                var data = Data()
+//                print("sfbknfks",image)
+//                // Add the image data to the raw http request data
+//            print("ffsnksf",parameter)
+//            if parameter != nil {
+//                for (key, value) in parameter! {
+//                    data.appendString(string: "--\(boundary)\r\n")
+//                    data.appendString(string: "Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+//                    data.appendString(string: "\(value)\r\n")
+//                }
+//            }
+////                data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+//////                data.append("Content-Disposition: form-data; name=\"uploaded_file\"; filename=\"\(filename)\"\r\n".data(using: .utf8)!)
+////                data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
+////                data.append(image!.pngData()!)
+////
+////                // End the raw http request data, note that there is 2 extra dash ("-") at the end, this is to indicate the end of the data
+////                // According to the HTTP 1.1 specification https://tools.ietf.org/html/rfc7230
+////                data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
+////            let filename = "\("Profile_Pic").jpg"
+////            let mimetype = "image/jpg"
+////            let data1 =  image?.pngData()
+////          //  data.appendString(string: "--\(boundary)\r\n")
+////            data.appendString(string: "Content-Disposition: form-data; name=\"\("file")\"; filename=\"\(filename)\"\r\n")
+////            data.appendString(string: "Content-Type: \(mimetype)\r\n\r\n")
+////            data.append(data1! as Data)
+//////            data.appendString(string: "\r\n")
+////            data.appendString(string: "--\(boundary)--\r\n")
+//            let imageData = image!.jpegData(compressionQuality: 1)
+//
+//            let filename = "user-profile.png"
+//
+//               let mimetype = "image/png"
+//
+//            data.appendString(string: "--\(boundary)\r\n")
+//            data.appendString(string: "Content-Disposition: form-data; name=\"\("Profile_Pic")\"; filename=\"\(filename)\"\r\n")
 //            data.appendString(string: "Content-Type: \(mimetype)\r\n\r\n")
-//            data.append(data1! as Data)
-////            data.appendString(string: "\r\n")
+//            data.append(imageData!)
+//            data.appendString(string: "\r\n")
+//
 //            data.appendString(string: "--\(boundary)--\r\n")
-            let imageData = image!.jpegData(compressionQuality: 1)
-
-            let filename = "user-profile.png"
-
-               let mimetype = "image/png"
-
-            data.appendString(string: "--\(boundary)\r\n")
-            data.appendString(string: "Content-Disposition: form-data; name=\"\("Profile_Pic")\"; filename=\"\(filename)\"\r\n")
-            data.appendString(string: "Content-Type: \(mimetype)\r\n\r\n")
-            data.append(imageData!)
-            data.appendString(string: "\r\n")
-
-            data.appendString(string: "--\(boundary)--\r\n")
-                // Send a POST request to the URL, with the data we created earlier
-            
-           
-                session.uploadTask(with: urlRequest, from: data, completionHandler:
-                {
-                    data, response, error in
-
-
-                    if error != nil
-                    {
-                         observer.onError(error!)
-                         return
-                    }
-
-                    guard let data = data else
-                    {
-                         observer.onError(ResponseError.noData)
-                         return
-                    }
-                    print("response",JSON(data))
-                    observer.onNext(data)
-                    observer.onCompleted()
-
+//                // Send a POST request to the URL, with the data we created earlier
+//            
+//           
+//                session.uploadTask(with: urlRequest, from: data, completionHandler:
+//                {
+//                    data, response, error in
 //
 //
-//                    if(error != nil){
-//                        print("\(error!.localizedDescription)")
+//                    if error != nil
+//                    {
+//                         observer.onError(error!)
+//                         return
 //                    }
 //
-//                    guard let responseData = responseData else {
-//                        print("no response data")
-//                        return
+//                    guard let data = data else
+//                    {
+//                         observer.onError(ResponseError.noData)
+//                         return
 //                    }
+//                    print("response",JSON(data))
+//                    observer.onNext(data)
+//                    observer.onCompleted()
 //
-//                    if let responseString = String(data: responseData, encoding: .utf8) {
-//                        print("uploaded to: \(responseString)")
-//                    }
-                }).resume()
-
-            
-            return Disposables.create
-            {
-            }
-        }
-    }
+////
+////
+////                    if(error != nil){
+////                        print("\(error!.localizedDescription)")
+////                    }
+////
+////                    guard let responseData = responseData else {
+////                        print("no response data")
+////                        return
+////                    }
+////
+////                    if let responseString = String(data: responseData, encoding: .utf8) {
+////                        print("uploaded to: \(responseString)")
+////                    }
+//                }).resume()
+//
+//            
+//            return Disposables.create
+//            {
+//            }
+//        }
+//    }
 //    func FileUploadRequest(parameters: [String: String]? = nil, dataFile: Data?, url: String, method: HTTPMethod = .POST, mimeType: String = "file/pdf", filename: String = "file_upload.pdf")-> Observable<Data>
 //    {
 //        return Observable.create
