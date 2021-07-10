@@ -1,0 +1,6 @@
+framework module Pods_hackintoshios {
+  umbrella header "Pods-hackintoshios-umbrella.h"
+
+  export *
+  module * { export * }
+}
