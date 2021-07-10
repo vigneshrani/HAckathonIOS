@@ -6,7 +6,8 @@ target 'hackintoshios' do
   use_frameworks!
 
   # Pods for hackintoshios
-  pod 'RxSwift'
+  pod 'RxSwift', '~> 5'
+  pod 'RxCocoa', '~> 5'
   pod 'SwiftyJSON'
-  pod 'RxCocoa'
+#  pod 'RxCocoa'
 end
