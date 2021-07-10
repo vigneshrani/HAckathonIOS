@@ -13,6 +13,16 @@ struct cartlistModel: Codable {
     let message: String?
     let orderItems: [OrderItem]?
     let orderTotal: OrderTotal?
+    init?(data: Data)
+    {
+    do
+    {
+        let jsonDecoder = JSONDecoder()
+        let decode = try jsonDecoder.decode(cartlistModel.self, from: data)
+        self = decode
+    } catch {
+        return nil
+    }
 }
 
 // MARK: - OrderItem
@@ -43,4 +53,5 @@ struct OrderItem: Codable {
 // MARK: - OrderTotal
 struct OrderTotal: Codable {
     let itemTotal, discount, toPay: Int?
+}
 }

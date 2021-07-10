@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RxSwift
+import SwiftyJSON
 //
 //  TimeSlotViewModel.swift
 //  RetailEcoSs
@@ -18,18 +20,14 @@ import Foundation
 import Foundation
 import RxSwift
 import SwiftyJSON
-class TimeSlotViewModel {
+class listcartViewmodel {
     
     
     private let disposeBag = DisposeBag()
     let isLoading = PublishSubject<Bool>()
     let errorMsg = PublishSubject<String>()
     let isSuccess = PublishSubject<Bool>()
-    var shoplistmodel: ShopListModel?
-    var Customer_Id : Int?
-    var status : TimeSlotStatus?
-    var DeliverySlot:DeliverySlot?
-    var DeliveryData:[DeliveryDatum]?
+
     func Getcartlist(){
         var params:JSON = JSON()
         let headers : [String: String] = [
@@ -37,10 +35,10 @@ class TimeSlotViewModel {
             //  "Authorization": "jwt \(UserDefaults.standard.getAccessToken())",
            // "TokenNo": "cce618086bfccd93b47dd9d4cf06f52778515b5d"
         ]
-        print("sfksfknsf",Shopid)
+      
        
       
-        HttpUtils().makeRequest(url: APIList().getUrlString(url: "http://139.59.37.241:3009/order/summary"), method: .POST, parameter: String(describing: params), authorization: headers).observe(on: MainScheduler.instance).subscribe(
+        HttpUtils().makeRequest(url: APIList().getUrlString(url: .summary), method: .POST, parameter: String(describing: params), authorization: headers).observe(on: MainScheduler.instance).subscribe(
             
             onNext:
                 {
@@ -65,7 +63,7 @@ class TimeSlotViewModel {
     func process(data: Data) {
         
         
-        if let dataModel = cartlistModel.init(data: data) {
+        if let dataModel = cartlistModel.init(data:data) {
            // shoplistmodel = MyStoreSearchCategoryModel.init(data: data)
             
 //            print("fksnnsf",DeliveryData)

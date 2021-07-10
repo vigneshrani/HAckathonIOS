@@ -6,7 +6,8 @@
 //
 
 import UIKit
-
+import RxSwift
+import SwiftyJSON
 class ViewCartViewController: UIViewController {
 
     @IBOutlet weak var tableview: UITableView!
@@ -23,9 +24,10 @@ class ViewCartViewController: UIViewController {
     @IBOutlet weak var addreesView: UIView!
     
     @IBOutlet weak var savebtn: UIButton!
-    
+    private let disposeBag = DisposeBag()
     var hidden = true
     var toolBar = UIToolbar()
+    private var Timeslotdetail = listcartViewmodel()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -41,9 +43,44 @@ class ViewCartViewController: UIViewController {
         changeLbl.addGestureRecognizer(uparrow)
         changeLbl.isUserInteractionEnabled = true
         setupToolBar()
+        Timeslotdetail.Getcartlist()
+        createCallBack()
         // Do any additional setup after loading the view.
     }
     
+    private func createCallBack() {
+        
+        
+        Timeslotdetail.errorMsg.asObservable().subscribe(onNext:
+            {
+                [unowned self] (errorMessage) in
+              
+             //   self.nodataview.isHidden = false
+                
+        }).disposed(by: disposeBag)
+        Timeslotdetail.isSuccess.asObserver()
+         .bind{ value in
+            
+            if   self.Timeslotdetail.DeliveryData == nil{
+                self.nodataview.isHidden = false
+            } else {
+                self.DeliverySlot = self.Timeslotdetail.DeliverySlot
+                self.nodataview.isHidden = true
+                self.DeliveryData = self.Timeslotdetail.DeliveryData
+                self.timeslotdata = self.Timeslotdetail.DeliveryData?[0].slotData ?? []
+                self.collectioview.reloadData()
+            }
+            
+        print("sfksfksf",self.Timeslotdetail.DeliveryData)
+            let tHeight = self.collectioview.frame.height
+            print("sfsfnsf",tHeight / CGFloat(7) - 10)
+            print("fsjsfjbsf",tHeight)
+            self.Titleheadercont.constant = tHeight / CGFloat(7) - 10
+            self.titleheaderview.isHidden = false
+            
+           
+     }.disposed(by: disposeBag)
+    }
     func setupToolBar() {
         toolBar.barStyle = UIBarStyle.default
         toolBar.sizeToFit()
@@ -84,7 +121,9 @@ class ViewCartViewController: UIViewController {
     }
     
     @IBAction func PAYNOW(_ sender: Any) {
-        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller  = storyBoard.instantiateViewController(withIdentifier: "PaymentViewController") as! ChangePasswordViewController
+        self.navigationController?.pushViewController (controller, animated: false)
     }
     
     @IBAction func SAVE(_ sender: Any) {
@@ -107,14 +146,14 @@ class ViewCartViewController: UIViewController {
         
     }
 
-    @objc func plusButton() {
-        let cell = tableview.cellForRow(at: IndexPath(row: index, section: 0)) as! viewCartTableViewCell
-        
-    }
-    @objc func lessButton() {
-        let cell = tableview.cellForRow(at: IndexPath(row: index, section: 0)) as! viewCartTableViewCell
-        
-    }
+//    @objc func plusButton() {
+//        let cell = tableview.cellForRow(at: IndexPath(row: index, section: 0)) as! viewCartTableViewCell
+//
+//    }
+//    @objc func lessButton() {
+//        let cell = tableview.cellForRow(at: IndexPath(row: index, section: 0)) as! viewCartTableViewCell
+//
+//    }
 
 }
 
@@ -133,8 +172,8 @@ extension ViewCartViewController : UITableViewDelegate , UITableViewDataSource {
 
         if tableView == tableview {
             let cell = tableview.dequeueReusableCell(withIdentifier: "viewCartTableViewCell", for: indexPath) as! viewCartTableViewCell
-            cell.plusBtn.addTarget(self, action: #selector(plusButton), for: .touchUpInside)
-            cell.lessBtn.addTarget(self, action: #selector(lessButton), for: .touchUpInside)
+//            cell.plusBtn.addTarget(self, action: #selector(plusButton), for: .touchUpInside)
+//            cell.lessBtn.addTarget(self, action: #selector(lessButton), for: .touchUpInside)
             cell.quantityBtn.text = "1"
             return cell
         } else if tableView == tableview2 {
