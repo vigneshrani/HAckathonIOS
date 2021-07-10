@@ -107,15 +107,14 @@ class ViewCartViewController: UIViewController {
         
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func plusButton() {
+        let cell = tableview.cellForRow(at: IndexPath(row: index, section: 0)) as! viewCartTableViewCell
+        
     }
-    */
+    @objc func lessButton() {
+        let cell = tableview.cellForRow(at: IndexPath(row: index, section: 0)) as! viewCartTableViewCell
+        
+    }
 
 }
 
@@ -134,6 +133,9 @@ extension ViewCartViewController : UITableViewDelegate , UITableViewDataSource {
 
         if tableView == tableview {
             let cell = tableview.dequeueReusableCell(withIdentifier: "viewCartTableViewCell", for: indexPath) as! viewCartTableViewCell
+            cell.plusBtn.addTarget(self, action: #selector(plusButton), for: .touchUpInside)
+            cell.lessBtn.addTarget(self, action: #selector(lessButton), for: .touchUpInside)
+            cell.quantityBtn.text = "1"
             return cell
         } else if tableView == tableview2 {
             let cell = tableview2.dequeueReusableCell(withIdentifier: "TimeDeliverTableViewCell", for: indexPath) as! TimeDeliverTableViewCell
