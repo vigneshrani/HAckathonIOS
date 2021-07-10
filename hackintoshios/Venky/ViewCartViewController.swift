@@ -107,14 +107,14 @@ class ViewCartViewController: UIViewController {
         
     }
 
-    @objc func plusButton() {
-        let cell = tableview.cellForRow(at: IndexPath(row: index, section: 0)) as! viewCartTableViewCell
-        
-    }
-    @objc func lessButton() {
-        let cell = tableview.cellForRow(at: IndexPath(row: index, section: 0)) as! viewCartTableViewCell
-        
-    }
+//    @objc func plusButton() {
+//        let cell = tableview.cellForRow(at: IndexPath(row: index, section: 0)) as! viewCartTableViewCell
+//
+//    }
+//    @objc func lessButton() {
+//        let cell = tableview.cellForRow(at: IndexPath(row: index, section: 0)) as! viewCartTableViewCell
+//
+//    }
 
 }
 
@@ -133,8 +133,8 @@ extension ViewCartViewController : UITableViewDelegate , UITableViewDataSource {
 
         if tableView == tableview {
             let cell = tableview.dequeueReusableCell(withIdentifier: "viewCartTableViewCell", for: indexPath) as! viewCartTableViewCell
-            cell.plusBtn.addTarget(self, action: #selector(plusButton), for: .touchUpInside)
-            cell.lessBtn.addTarget(self, action: #selector(lessButton), for: .touchUpInside)
+//            cell.plusBtn.addTarget(self, action: #selector(plusButton), for: .touchUpInside)
+//            cell.lessBtn.addTarget(self, action: #selector(lessButton), for: .touchUpInside)
             cell.quantityBtn.text = "1"
             return cell
         } else if tableView == tableview2 {

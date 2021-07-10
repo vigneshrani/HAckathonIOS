@@ -361,84 +361,84 @@ class HttpUtils
 //            data.appendString(string: "Content-Disposition: form-data; name=\"\("Profile_Pic")\"; filename=\"\(filename)\"\r\n")
 //            data.appendString(string: "Content-Type: \(mimetype)\r\n\r\n")
 //            data.append(imageData!)
-//            data.appendString(string: "\r\n")
-//
-//            data.appendString(string: "--\(boundary)--\r\n")
-//                // Send a POST request to the URL, with the data we created earlier
-<<<<<<< HEAD
-//
-//
-//                session.uploadTask(with: urlRequest, from: data, completionHandler:
-//                {
-//                    data, response, error in
-//
-//
-//                    if error != nil
-//                    {
-//                         observer.onError(error!)
-=======
-//            
-//           
-//                session.uploadTask(with: urlRequest, from: data, completionHandler:
-//                {
-//                    data, response, error in
-//
-//
-//                    if error != nil
-//                    {
-//                         observer.onError(error!)
-//                         return
-//                    }
-//
-//                    guard let data = data else
-//                    {
-//                         observer.onError(ResponseError.noData)
->>>>>>> 32d8fe07d95a2ef5d17a342f506ccd026451c50f
-//                         return
-//                    }
-//                    print("response",JSON(data))
-//                    observer.onNext(data)
-//                    observer.onCompleted()
-//
-<<<<<<< HEAD
-//                    guard let data = data else
-//                    {
-//                         observer.onError(ResponseError.noData)
-//                         return
-//                    }
-//                    print("response",JSON(data))
-//                    observer.onNext(data)
-//                    observer.onCompleted()
-//
-=======
->>>>>>> 32d8fe07d95a2ef5d17a342f506ccd026451c50f
+////            data.appendString(string: "\r\n")
+////
+////            data.appendString(string: "--\(boundary)--\r\n")
+////                // Send a POST request to the URL, with the data we created earlier
+//<<<<<<< HEAD
 ////
 ////
-////                    if(error != nil){
-////                        print("\(error!.localizedDescription)")
+////                session.uploadTask(with: urlRequest, from: data, completionHandler:
+////                {
+////                    data, response, error in
+////
+////
+////                    if error != nil
+////                    {
+////                         observer.onError(error!)
+//=======
+////            
+////           
+////                session.uploadTask(with: urlRequest, from: data, completionHandler:
+////                {
+////                    data, response, error in
+////
+////
+////                    if error != nil
+////                    {
+////                         observer.onError(error!)
+////                         return
 ////                    }
 ////
-////                    guard let responseData = responseData else {
-////                        print("no response data")
-////                        return
+////                    guard let data = data else
+////                    {
+////                         observer.onError(ResponseError.noData)
+//>>>>>>> 32d8fe07d95a2ef5d17a342f506ccd026451c50f
+////                         return
 ////                    }
+////                    print("response",JSON(data))
+////                    observer.onNext(data)
+////                    observer.onCompleted()
 ////
-////                    if let responseString = String(data: responseData, encoding: .utf8) {
-////                        print("uploaded to: \(responseString)")
+//<<<<<<< HEAD
+////                    guard let data = data else
+////                    {
+////                         observer.onError(ResponseError.noData)
+////                         return
 ////                    }
-//                }).resume()
-//
-<<<<<<< HEAD
-//
-=======
-//            
->>>>>>> 32d8fe07d95a2ef5d17a342f506ccd026451c50f
-//            return Disposables.create
-//            {
-//            }
-//        }
-//    }
-//    func FileUploadRequest(parameters: [String: String]? = nil, dataFile: Data?, url: String, method: HTTPMethod = .POST, mimeType: String = "file/pdf", filename: String = "file_upload.pdf")-> Observable<Data>
+////                    print("response",JSON(data))
+////                    observer.onNext(data)
+////                    observer.onCompleted()
+////
+//=======
+//>>>>>>> 32d8fe07d95a2ef5d17a342f506ccd026451c50f
+//////
+//////
+//////                    if(error != nil){
+//////                        print("\(error!.localizedDescription)")
+//////                    }
+//////
+//////                    guard let responseData = responseData else {
+//////                        print("no response data")
+//////                        return
+//////                    }
+//////
+//////                    if let responseString = String(data: responseData, encoding: .utf8) {
+//////                        print("uploaded to: \(responseString)")
+//////                    }
+////                }).resume()
+////
+//<<<<<<< HEAD
+////
+//=======
+////            
+//>>>>>>> 32d8fe07d95a2ef5d17a342f506ccd026451c50f
+////            return Disposables.create
+////            {
+////            }
+////        }
+////    }
+////    func FileUploadRequest(parameters: [String: String]? = nil, dataFile: Data?, url: String, method: HTTPMethod = .POST, mimeType: String = "file/pdf", filename: String = "file_upload.pdf")-> Observable<Data>
 //    {
 //        return Observable.create
 //        {

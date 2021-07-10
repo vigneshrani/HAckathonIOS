@@ -11,7 +11,7 @@ import Foundation
 
 struct APIList {
     
-        let BASE_URL = "https://www.retailecoss.com/retailecos/api/"
+        let BASE_URL = "http://139.59.37.241:3009/order/"
         let BASE_URL_DEV = "https://www.smartkirana.ca/retailecos/api/"
     
         func getUrlString(url: urlString) -> String {
@@ -22,6 +22,7 @@ struct APIList {
 
 enum urlString: String {
     //MARK: For Student flow
+    case summary = "summary"
     case validate_OTP = "validateOtp"
     case Fetch_Customer_Profile = "FetchCustomerProfile"
     case Fetch_Customer_Delivery_Address = "FetchCustomerDeliveryAddress"
