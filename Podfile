@@ -7,6 +7,7 @@ target 'hackintoshios' do
 
   # Pods for hackintoshios
   pod 'RxSwift'
-  pod 'SwiftyJSON'
   pod 'RxCocoa'
+  pod 'SwiftyJSON'
+#  pod 'RxCocoa'
 end

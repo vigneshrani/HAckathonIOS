@@ -365,8 +365,20 @@ class HttpUtils
 //
 //            data.appendString(string: "--\(boundary)--\r\n")
 //                // Send a POST request to the URL, with the data we created earlier
+<<<<<<< HEAD
 //
 //
+//                session.uploadTask(with: urlRequest, from: data, completionHandler:
+//                {
+//                    data, response, error in
+//
+//
+//                    if error != nil
+//                    {
+//                         observer.onError(error!)
+=======
+//            
+//           
 //                session.uploadTask(with: urlRequest, from: data, completionHandler:
 //                {
 //                    data, response, error in
@@ -381,12 +393,25 @@ class HttpUtils
 //                    guard let data = data else
 //                    {
 //                         observer.onError(ResponseError.noData)
+>>>>>>> 32d8fe07d95a2ef5d17a342f506ccd026451c50f
 //                         return
 //                    }
 //                    print("response",JSON(data))
 //                    observer.onNext(data)
 //                    observer.onCompleted()
 //
+<<<<<<< HEAD
+//                    guard let data = data else
+//                    {
+//                         observer.onError(ResponseError.noData)
+//                         return
+//                    }
+//                    print("response",JSON(data))
+//                    observer.onNext(data)
+//                    observer.onCompleted()
+//
+=======
+>>>>>>> 32d8fe07d95a2ef5d17a342f506ccd026451c50f
 ////
 ////
 ////                    if(error != nil){
@@ -403,7 +428,11 @@ class HttpUtils
 ////                    }
 //                }).resume()
 //
+<<<<<<< HEAD
 //
+=======
+//            
+>>>>>>> 32d8fe07d95a2ef5d17a342f506ccd026451c50f
 //            return Disposables.create
 //            {
 //            }
